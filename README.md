@@ -2,7 +2,7 @@
 
 Python implementation of Recursive Language Models for processing unbounded context lengths.
 
-**Based on the paper by Alex Zhang and Omar Khattab (MIT, 2025):** https://alexzhang13.github.io/blog/2025/rlm/
+**Based on [the paper](https://alexzhang13.github.io/blog/2025/rlm/) by Alex Zhang and Omar Khattab (MIT, 2025)**
 
 
 ## What is RLM?
@@ -70,38 +70,13 @@ print(result)
 
 ## API Keys Setup
 
-### Option 1: Use .env file (recommended)
-
-Create a `.env` file in the project root:
+Set your API key via environment variable or pass it directly:
 
 ```bash
-# Copy the example file
-cp .env.example .env
-
-# Edit .env and add your API key
+export OPENAI_API_KEY="sk-..."  # or ANTHROPIC_API_KEY, etc.
 ```
 
-Your `.env` file should look like:
-```bash
-OPENAI_API_KEY=sk-your-actual-key-here
-```
-
-### Option 2: Environment variables
-
-```bash
-# For OpenAI
-export OPENAI_API_KEY="sk-..."
-
-# For Anthropic
-export ANTHROPIC_API_KEY="sk-ant-..."
-
-# For Azure OpenAI
-export AZURE_API_KEY="..."
-export AZURE_API_BASE="https://..."
-```
-
-### Option 3: Pass directly in code
-
+Or pass directly in code:
 ```python
 rlm = RLM(model="gpt-5-mini", api_key="sk-...")
 ```
@@ -218,12 +193,12 @@ python examples/basic_usage.py
 ### Paper Results
 
 On OOLONG benchmark (132k tokens):
-- GPT-4o: baseline
-- RLM(GPT-4o-mini): **33% better than GPT-4o** at similar cost
+- GPT-5: baseline
+- RLM(GPT-5-Mini): **33% better than GPT-5** at similar cost
 
 ### Our Benchmark Results
 
-On 60k token contexts (see `benchmarks/` for details):
+On 60k token contexts:
 - **RLM**: 80% accurate, 2.1s avg, ~2k tokens
 - **Direct OpenAI**: 0% accurate, 6.9s avg, ~95k tokens
 
@@ -233,13 +208,11 @@ On 150k+ token contexts:
 - **Direct OpenAI**: Fails (rate limit errors)
 - **RLM**: Works (only option available)
 
-See `benchmarks/README.md` for comprehensive test results.
-
 ## Development
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/recursive-llm.git
+git clone https://github.com/ysz/recursive-llm.git
 cd recursive-llm
 
 # Install with dev dependencies
@@ -300,14 +273,6 @@ Built on top of LiteLLM for universal LLM support.
 - Pull a model first: `ollama pull llama3.2`
 - Use model format: `ollama/model-name`
 
-## Roadmap
-
-- [x] v0.1.0 - Initial implementation
-- [ ] v0.2.0 - Streaming support
-- [ ] v0.3.0 - Parallel REPL execution
-- [ ] v0.4.0 - Prefix caching integration
-- [ ] v1.0.0 - Production ready with benchmarks
-
 ## Contributing
 
 Contributions welcome! Please:
@@ -322,6 +287,16 @@ Contributions welcome! Please:
 
 This implementation is based on the RLM paper by Alex Zhang and Omar Khattab.
 
+**To cite this implementation:**
+```bibtex
+@software{rlm_python,
+  title = {recursive-llm: Python Implementation of Recursive Language Models},
+  author = {Gvadzabia, Grigori},
+  year = {2025},
+  url = {https://github.com/ysz/recursive-llm}
+}
+```
+
 **To cite the original paper:**
 ```bibtex
 @misc{zhang2025rlm,
@@ -330,16 +305,6 @@ This implementation is based on the RLM paper by Alex Zhang and Omar Khattab.
   year = {2025},
   month = {October},
   url = {https://alexzhang13.github.io/blog/2025/rlm/}
-}
-```
-
-**To cite this implementation:**
-```bibtex
-@software{rlm_python,
-  title = {recursive-llm: Python Implementation of Recursive Language Models},
-  author = {Gvadzabia, Grigori},
-  year = {2025},
-  url = {https://github.com/ysz/recursive-llm}
 }
 ```
 
@@ -359,4 +324,4 @@ Built using:
 
 - **Paper**: https://alexzhang13.github.io/blog/2025/rlm/
 - **LiteLLM Docs**: https://docs.litellm.ai/
-- **Issues**: https://github.com/yourusername/recursive-llm/issues
+- **Issues**: https://github.com/ysz/recursive-llm/issues
