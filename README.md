@@ -87,7 +87,7 @@ Works with 100+ LLM providers via LiteLLM:
 
 ```python
 # OpenAI
-rlm = RLM(model="gpt-5-mini")
+rlm = RLM(model="gpt-5")
 rlm = RLM(model="gpt-5-mini")
 
 # Anthropic
@@ -118,7 +118,7 @@ Use a cheaper model for recursive calls:
 
 ```python
 rlm = RLM(
-    model="gpt-5-mini",              # Root LM (main decisions)
+    model="gpt-5",              # Root LM (main decisions)
     recursive_model="gpt-5-mini"  # Recursive calls (cheaper)
 )
 ```
@@ -157,7 +157,7 @@ rlm = RLM(
 3. **LM can explore context** using Python code:
    ```python
    # Peek at context
-   context[:100]
+   context[:1000]
 
    # Search with regex
    import re
@@ -198,15 +198,19 @@ On OOLONG benchmark (132k tokens):
 
 ### Our Benchmark Results
 
-On 60k token contexts:
-- **RLM**: 80% accurate, 2.1s avg, ~2k tokens
-- **Direct OpenAI**: 0% accurate, 6.9s avg, ~95k tokens
+Tested with GPT-5-Mini on structured data queries (counting, filtering) across 5 different test cases:
 
-**RLM wins on: accuracy (80% vs 0%), speed (3.3x faster), cost (97.9% savings)**
+**60k token contexts:**
+- **RLM**: 80% accurate (4/5 correct)
+- **Direct OpenAI**: 0% accurate (0/5 correct, all returned approximations)
 
-On 150k+ token contexts:
+RLM wins on accuracy. Both complete requests, but only RLM gives correct answers.
+
+**150k+ token contexts:**
 - **Direct OpenAI**: Fails (rate limit errors)
-- **RLM**: Works (only option available)
+- **RLM**: Works (processes 1M+ tokens successfully)
+
+**Token efficiency:** RLM uses ~2-3k tokens per query vs 95k+ for direct approach, since context is stored as a variable instead of being sent in prompts.
 
 ## Development
 
