@@ -169,6 +169,7 @@ class RLM:
             if is_final(response):
                 answer = parse_response(response, repl_env)
                 if answer is not None:
+                    self.logger.info(f"Final answer: {answer[:200]}..." if len(answer) > 200 else f"Final answer: {answer}")
                     self.logger.info(f"Completion finished. LLM calls: {self._llm_calls}, Iterations: {self._iterations}")
                     return answer
 
