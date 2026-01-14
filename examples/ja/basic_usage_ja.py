@@ -54,14 +54,14 @@ def main():
     """Run basic RLM example."""
     rlm = RLM(
         model="gpt-4o",  # Use mini for cheaper testing
-        max_iterations=15
+        max_iterations=15,
+        temperature=0.7
     )
 
     query = "この文書によると、AI開発における主要なマイルストーンは何ですか？年代ごとにまとめてください。"
 
     try:
-        result = rlm.completion(query, long_document)
-        print(result)
+        rlm.completion(query, long_document)
 
     except Exception as e:
         print(f"Error: {e}")
