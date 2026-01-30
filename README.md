@@ -2,7 +2,7 @@
 
 Python implementation of Recursive Language Models for processing unbounded context lengths.
 
-**Based on [the paper](https://alexzhang13.github.io/blog/2025/rlm/) by Alex Zhang and Omar Khattab (MIT, 2025)**
+**Based on [the paper](https://alexzhang13.github.io/blog/2025/rlm/) by Alex Zhang and Omar Khattab (MIT, 2025)** | [arXiv](https://arxiv.org/abs/2512.24601)
 
 
 ## What is RLM?
@@ -145,8 +145,7 @@ rlm = RLM(
     model="gpt-5-mini",
     max_depth=5,         # Maximum recursion depth
     max_iterations=20,   # Maximum REPL iterations
-    temperature=0.7,     # LLM parameters
-    timeout=60
+    # Optional LiteLLM params: temperature, timeout, etc.
 )
 ```
 
@@ -308,7 +307,9 @@ This implementation is based on the RLM paper by Alex Zhang and Omar Khattab.
   author = {Zhang, Alex and Khattab, Omar},
   year = {2025},
   month = {October},
-  url = {https://alexzhang13.github.io/blog/2025/rlm/}
+  url = {https://alexzhang13.github.io/blog/2025/rlm/},
+  eprint = {2512.24601},
+  archivePrefix = {arXiv}
 }
 ```
 
@@ -327,5 +328,6 @@ Built using:
 ## Links
 
 - **Paper**: https://alexzhang13.github.io/blog/2025/rlm/
+- **arXiv**: https://arxiv.org/abs/2512.24601
 - **LiteLLM Docs**: https://docs.litellm.ai/
 - **Issues**: https://github.com/ysz/recursive-llm/issues

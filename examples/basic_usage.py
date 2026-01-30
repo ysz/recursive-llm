@@ -49,7 +49,7 @@ def main():
     rlm = RLM(
         model="gpt-5-mini",  # Use mini for cheaper testing
         max_iterations=15,
-        temperature=0.7
+        # temperature=0.7,  # Optional: not all models support this (e.g., gpt-5 only allows temperature=1)
     )
 
     # Ask a question about the document
