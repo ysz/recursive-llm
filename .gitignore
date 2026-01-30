@@ -138,3 +138,6 @@ benchmarks/
 
 # Internal documentation (development notes, not for distribution)
 docs/
+
+# Local tests
+local_tests/
