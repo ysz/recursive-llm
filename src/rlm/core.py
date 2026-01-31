@@ -69,14 +69,14 @@ class RLM:
         self._llm_calls = 0
         self._iterations = 0
 
-    def completion(
+    def complete(
         self,
         query: str = "",
         context: str = "",
         **kwargs: Any
     ) -> str:
         """
-        Sync wrapper for acompletion.
+        Sync wrapper for acomplete.
 
         Args:
             query: User query (optional if query is in context)
@@ -88,29 +88,29 @@ class RLM:
 
         Examples:
             # Standard usage
-            rlm.completion(query="Summarize this", context=document)
+            rlm.complete(query="Summarize this", context=document)
 
             # Query in context (RLM will extract task)
-            rlm.completion(context="Summarize this document: ...")
+            rlm.complete(context="Summarize this document: ...")
 
             # Single string (treat as context)
-            rlm.completion("Process this text and extract dates")
+            rlm.complete("Process this text and extract dates")
         """
         # If only one argument provided, treat it as context
         if query and not context:
             context = query
             query = ""
 
-        return asyncio.run(self.acompletion(query, context, **kwargs))
+        return asyncio.run(self.acomplete(query, context, **kwargs))
 
-    async def acompletion(
+    async def acomplete(
         self,
         query: str = "",
         context: str = "",
         **kwargs: Any
     ) -> str:
         """
-        Main async completion method.
+        Main async complete method.
 
         Args:
             query: User query (optional if query is in context)
@@ -126,13 +126,13 @@ class RLM:
 
         Examples:
             # Explicit query and context
-            await rlm.acompletion(query="What is this?", context=doc)
+            await rlm.acomplete(query="What is this?", context=doc)
 
             # Query embedded in context
-            await rlm.acompletion(context="Extract all dates from: ...")
+            await rlm.acomplete(context="Extract all dates from: ...")
 
             # LLM will figure out the task
-            await rlm.acompletion(context=document_with_instructions)
+            await rlm.acomplete(context=document_with_instructions)
         """
         # If only query provided, treat it as context
         if query and not context:
@@ -272,7 +272,7 @@ class RLM:
                 **self.llm_kwargs
             )
 
-            return await sub_rlm.acompletion(sub_query, sub_context)
+            return await sub_rlm.acomplete(sub_query, sub_context)
 
         # Wrap in sync function for REPL compatibility
         def sync_recursive_llm(sub_query: str, sub_context: str) -> str:

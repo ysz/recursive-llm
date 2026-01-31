@@ -113,7 +113,7 @@ def main():
         print(f"Query: {query}")
 
         try:
-            result = rlm.completion(query, combined)
+            result = rlm.complete(query, combined)
             print(f"Answer: {result}")
             print(f"Stats: {rlm.stats['llm_calls']} calls\n")
 

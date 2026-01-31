@@ -25,7 +25,7 @@ async def test_peek_strategy():
         mock.side_effect = responses
 
         rlm = RLM(model="test-model")
-        result = await rlm.acompletion(
+        result = await rlm.acomplete(
             "What does the context start with?",
             "This is a long document that starts with this sentence..."
         )
@@ -45,7 +45,7 @@ async def test_search_strategy():
         mock.side_effect = responses
 
         rlm = RLM(model="test-model")
-        result = await rlm.acompletion(
+        result = await rlm.acomplete(
             "Find all years",
             "The years 2020, 2021, and 2022 were important."
         )
@@ -64,7 +64,7 @@ async def test_chunk_strategy():
     with patch('rlm.core.litellm.acompletion') as mock:
         mock.side_effect = responses
         rlm = RLM(model="test-model")
-        result = await rlm.acompletion(
+        result = await rlm.acomplete(
             "Chunk the context",
             "A" * 50  # 50 chars -> 5 chunks of 10
         )
@@ -89,7 +89,7 @@ Age: 30
 Name: Bob
 Age: 25
 """
-        result = await rlm.acompletion("Extract names", context)
+        result = await rlm.acomplete("Extract names", context)
 
         assert "Alice" in result or "Bob" in result
 
@@ -106,7 +106,7 @@ async def test_error_recovery():
     with patch('rlm.core.litellm.acompletion') as mock:
         mock.side_effect = responses
         rlm = RLM(model="test-model")
-        result = await rlm.acompletion("Test", "Context")
+        result = await rlm.acomplete("Test", "Context")
 
         assert result == "Error recovered"
 
@@ -123,7 +123,7 @@ async def test_long_context():
         mock.side_effect = responses
         rlm = RLM(model="test-model")
         long_context = "A" * 100000  # 100k chars
-        result = await rlm.acompletion("How long is this?", long_context)
+        result = await rlm.acomplete("How long is this?", long_context)
 
         assert "100000" in result
 
@@ -138,7 +138,7 @@ async def test_multiline_answer():
     with patch('rlm.core.litellm.acompletion') as mock:
         mock.side_effect = responses
         rlm = RLM(model="test-model")
-        result = await rlm.acompletion("Test", "Context")
+        result = await rlm.acomplete("Test", "Context")
 
         assert "Line 1" in result
         assert "Line 2" in result
@@ -152,7 +152,7 @@ async def test_context_not_in_prompt():
 
         rlm = RLM(model="test-model")
         context = "Very long context " * 1000
-        await rlm.acompletion("Test", context)
+        await rlm.acomplete("Test", context)
 
         # Check that context is not in any message
         call_args = mock.call_args[1]

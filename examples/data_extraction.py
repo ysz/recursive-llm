@@ -62,7 +62,7 @@ def main():
         print("-" * 80)
 
         try:
-            result = rlm.completion(task, document)
+            result = rlm.complete(task, document)
             print(f"Result:\n{result}")
 
         except Exception as e:

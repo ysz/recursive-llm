@@ -82,7 +82,7 @@ def main():
         print(f"Query: {query}")
 
         try:
-            result = rlm.completion(query, document)
+            result = rlm.complete(query, document)
 
             print(f"Answer: {result}")
             print(f"Performance: {rlm.stats['llm_calls']} LLM calls, "

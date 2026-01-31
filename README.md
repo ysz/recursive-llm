@@ -20,7 +20,7 @@ llm.complete(prompt="Summarize this", context=huge_document)  # Context rot!
 RLM does this:
 ```python
 rlm = RLM(model="gpt-5-mini")
-result = rlm.completion(
+result = rlm.complete(
     query="Summarize this",
     context=huge_document  # Stored as variable, not in prompt
 )
@@ -61,7 +61,7 @@ from rlm import RLM
 rlm = RLM(model="gpt-5-mini")
 
 # Process long context
-result = rlm.completion(
+result = rlm.complete(
     query="What are the main themes in this document?",
     context=long_document
 )
@@ -132,7 +132,7 @@ import asyncio
 
 async def main():
     rlm = RLM(model="gpt-5-mini")
-    result = await rlm.acompletion(query, context)
+    result = await rlm.acomplete(query, context)
     print(result)
 
 asyncio.run(main())
@@ -170,7 +170,7 @@ rlm = RLM(
 ## Examples
 
 See the `examples/` directory for complete working examples:
-- `basic_usage.py` - Simple completion with OpenAI
+- `basic_usage.py` - Simple complete with OpenAI
 - `ollama_local.py` - Using Ollama locally
 - `two_models.py` - Cost optimization with two models
 - `long_document.py` - Processing 50k+ token documents
@@ -294,7 +294,7 @@ This implementation is based on the RLM paper by Alex Zhang and Omar Khattab.
 ```bibtex
 @software{rlm_python,
   title = {recursive-llm: Python Implementation of Recursive Language Models},
-  author = {Gvadzabia, Grigori},
+  author = {Gvadzabia, Grisha},
   year = {2025},
   url = {https://github.com/ysz/recursive-llm}
 }

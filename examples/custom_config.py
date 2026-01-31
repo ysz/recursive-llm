@@ -57,7 +57,7 @@ async def async_example():
     ]
 
     # Run queries concurrently
-    tasks = [rlm.acompletion(q, context) for q in queries]
+    tasks = [rlm.acomplete(q, context) for q in queries]
     results = await asyncio.gather(*tasks)
 
     for query, result in zip(queries, results):
@@ -82,7 +82,7 @@ def custom_params_example():
     )
 
     query = "Describe the storage configuration across all servers"
-    result = rlm.completion(query, context)
+    result = rlm.complete(query, context)
 
     print(f"Query: {query}")
     print(f"Result: {result}")
@@ -103,7 +103,7 @@ def local_model_example():
     query = "Which server should I use for high-memory workloads?"
 
     try:
-        result = rlm.completion(query, context)
+        result = rlm.complete(query, context)
         print(f"Query: {query}")
         print(f"Result: {result}")
     except Exception as e:
@@ -124,7 +124,7 @@ def error_handling_example():
 
     try:
         # This might exceed iterations
-        result = rlm.completion(
+        result = rlm.complete(
             "Perform detailed analysis of all servers",
             context
         )
@@ -152,7 +152,7 @@ def stats_example():
     )
 
     query = "Compare CPU specs across all servers"
-    result = rlm.completion(query, context)
+    result = rlm.complete(query, context)
 
     print(f"Query: {query}")
     print(f"Result: {result}\n")

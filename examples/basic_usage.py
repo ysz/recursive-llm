@@ -61,7 +61,7 @@ def main():
 
     try:
         # Process with RLM
-        result = rlm.completion(query, long_document)
+        result = rlm.complete(query, long_document)
 
         print("Result:")
         print(result)
